@@ -1,0 +1,20 @@
+<odoo>
+    <template id="custom_snippets" inherit_id="website.snippets" name="custom snippets">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">Custom Snippets</div>
+                <div class="o_panel_body">
+                    <t t-snippet="dkt_website_core.news_snippet"> <!--nama_folder.id_snippets-->
+                        <keywords>News, Snippet</keywords>
+                    </t>
+                    <t t-snippet="dkt_website_core.government_services_snippet"> <!--nama_folder.id_snippets-->
+                        <keywords>Services, Snippet</keywords>
+                    </t>
+                    <t t-snippet="dkt_website_core.headline_snippet"> <!--nama_folder.id_snippets-->
+                        <keywords>Headline, Snippet</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

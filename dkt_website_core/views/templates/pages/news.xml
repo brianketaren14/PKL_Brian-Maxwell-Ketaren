@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="news_list_template" name="News List">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'news'"/>
+            <div class="oe_structure">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h1 class="mb-4">Berita Terkini</h1>
+                            <!-- News List -->
+                            <div class="news-list">
+                                <t t-foreach="news_items" t-as="news">
+                                    <div class="card mb-4">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img t-if="news.thumbnail" t-att-src="'/web/image/website.news/%s/thumbnail' % news.id" 
+                                                     class="img-fluid rounded-start" alt="News Image" style="object-fit: cover; height: 100%;"/>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title" t-field="news.name"/>
+                                                    <p class="card-text" t-field="news.teaser"/>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">
+                                                            <i class="fa fa-calendar me-2"></i>
+                                                            <t t-esc="news.date_published.strftime('%d %B %Y')"/>
+                                                        </small>
+                                                    </p>
+                                                    <a t-attf-href="/news/#{news.slug}" class="btn btn-primary">Baca Selengkapnya</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <!-- Pagination -->
+                            <t t-call="website.pager"/>
+                        </div>
+                        <div class="col-lg-4">
+                            <!-- Search Box -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pencarian</h5>
+                                    <form method="get" class="input-group" t-attf-action="/news">
+                                        <input type="text" name="search" class="form-control" placeholder="Cari berita..." 
+                                               t-att-value="search if search else ''"/>
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Categories -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Kategori</h5>
+                                    <div class="list-group">
+                                        <t t-foreach="categories" t-as="category">
+                                            <a t-attf-href="/news?category=#{category.id}" 
+                                               t-attf-class="list-group-item list-group-item-action #{category.id == active_category and 'active'}">
+                                                <t t-esc="category.name"/>
+                                                <span class="badge bg-primary float-end" t-esc="category.news_count"/>
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Recent Posts -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Berita Terbaru</h5>
+                                    <div class="list-group list-group-flush">
+                                        <t t-foreach="recent_news" t-as="news">
+                                            <a t-attf-href="/news/#{news.slug}" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1" t-field="news.name"/>
+                                                </div>
+                                                <small class="text-muted">
+                                                    <i class="fa fa-calendar me-2"></i>
+                                                    <t t-esc="news.date_published.strftime('%d %B %Y')"/>
+                                                </small>
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Template Detail Berita -->
+    <template id="news_detail_template" name="News Detail">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'news'"/>
+            <div class="oe_structure">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb" class="mb-4">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/news">Berita</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><t t-esc="news.name"/></li>
+                                </ol>
+                            </nav>
+                            
+                            <!-- News Content -->
+                            <article class="blog-post">
+                                <h1 class="blog-post-title mb-3" t-field="news.name"/>
+                                <div class="blog-post-meta text-muted mb-4">
+                                    <span class="me-3">
+                                        <i class="fa fa-calendar me-2"></i>
+                                        <t t-esc="news.date_published.strftime('%d %B %Y')"/>
+                                    </span>
+                                    <span class="me-3">
+                                        <i class="fa fa-user me-2"></i>
+                                        <span t-field="news.author_id.name"/>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-folder me-2"></i>
+                                        <span t-field="news.category_id.name"/>
+                                    </span>
+                                </div>
+                                
+                                <!-- Featured Image -->
+                                <div class="mb-4" t-if="news.thumbnail">
+                                    <img t-att-src="'/web/image/website.news/%s/thumbnail' % news.id" 
+                                         class="img-fluid rounded" alt="News Image"/>
+                                </div>
+                                
+                                <!-- Content -->
+                                <div class="blog-post-content" t-field="news.content"/>
+                            </article>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <!-- Categories -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Kategori</h5>
+                                    <div class="list-group">
+                                        <t t-foreach="categories" t-as="category">
+                                            <a t-attf-href="/news?category=#{category.id}" 
+                                               class="list-group-item list-group-item-action">
+                                                <t t-esc="category.name"/>
+                                                <span class="badge bg-primary float-end" t-esc="category.news_count"/>
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Posts -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Berita Terbaru</h5>
+                                    <div class="list-group list-group-flush">
+                                        <t t-foreach="recent_news" t-as="recent">
+                                            <a t-if="recent.id != news.id" t-attf-href="/news/#{recent.slug}" 
+                                               class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1" t-field="recent.name"/>
+                                                </div>
+                                                <small class="text-muted">
+                                                    <i class="fa fa-calendar me-2"></i>
+                                                    <t t-esc="recent.date_published.strftime('%d %B %Y')"/>
+                                                </small>
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo> 

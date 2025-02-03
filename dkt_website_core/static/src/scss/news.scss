@@ -1,0 +1,124 @@
+// News Card
+.news-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.4;
+        margin-bottom: 0.75rem;
+    }
+    
+    .card-text {
+        color: #6c757d;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+}
+
+// Blog Post
+.blog-post {
+    .blog-post-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+    
+    .blog-post-meta {
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 1rem;
+    }
+    
+    .blog-post-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+        
+        h2, h3, h4 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        blockquote {
+            border-left: 4px solid #0d6efd;
+            padding-left: 1rem;
+            margin-left: 0;
+            font-style: italic;
+            color: #6c757d;
+        }
+    }
+}
+
+// Related News
+.related-news {
+    h6 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        
+        a {
+            color: inherit;
+            
+            &:hover {
+                color: #0d6efd;
+            }
+        }
+    }
+}
+
+// Category Buttons
+.btn-group {
+    .btn {
+        margin: 0 0.25rem;
+        border-radius: 2rem !important;
+        padding: 0.5rem 1rem;
+        
+        &:first-child {
+            margin-left: 0;
+        }
+        
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+// Pagination
+.page-link {
+    border-radius: 0.5rem;
+    margin: 0 0.25rem;
+    border: none;
+    
+    &:hover {
+        background-color: #e9ecef;
+    }
+    
+    &.active {
+        background-color: #0d6efd;
+        color: white;
+    }
+}

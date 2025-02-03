@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Service Tree View -->
+    <record id="view_government_service_tree" model="ir.ui.view">
+        <field name="name">government.service.tree</field>
+        <field name="model">government.service</field>
+        <field name="arch" type="xml">
+            <tree string="Layanan Pemerintah">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="service_type"/>
+                <field name="description"/>
+                <field name="is_active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Service Form View -->
+    <record id="view_government_service_form" model="ir.ui.view">
+        <field name="name">government.service.form</field>
+        <field name="model">government.service</field>
+        <field name="arch" type="xml">
+            <form string="Layanan Pemerintah">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="is_active" widget="boolean_button"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Nama Layanan"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="service_type"/>
+                            <field name="url" placeholder="https://..."/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ikon">
+                            <group>
+                                <field name="icon" widget="image"/>
+                            </group>
+                        </page>
+                        <page string="Deskripsi">
+                            <field name="description" placeholder="Deskripsi layanan yang akan ditampilkan..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Service Search View -->
+    <record id="view_government_service_search" model="ir.ui.view">
+        <field name="name">government.service.search</field>
+        <field name="model">government.service</field>
+        <field name="arch" type="xml">
+            <search string="Cari Layanan">
+                <field name="name"/>
+                <field name="description"/>
+                <filter string="Aktif" name="active" domain="[('is_active', '=', True)]"/>
+                <filter string="Arsip" name="inactive" domain="[('is_active', '=', False)]"/>
+                <group expand="0" string="Kelompok">
+                    <filter string="Tipe Layanan" name="service_type" context="{'group_by': 'service_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Service Action Window -->
+    <record id="action_government_service" model="ir.actions.act_window">
+        <field name="name">Layanan Pemerintah</field>
+        <field name="res_model">government.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Buat layanan pertama Anda
+            </p>
+        </field>
+    </record>
+</odoo> 

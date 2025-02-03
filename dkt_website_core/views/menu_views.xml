@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Disable GeoIP -->
+    <record id="disable_geoip" model="ir.config_parameter">
+        <field name="key">geoip_enabled</field>
+        <field name="value">False</field>
+    </record>
+
+    <!-- Main Menu -->
+    <menuitem id="menu_website_pemkab_root"
+        name="Website Pemkab"
+        web_icon="dkt_website_core,static/description/icon.png"
+        sequence="10"/>
+
+    <!-- Banner Menu -->
+    <menuitem id="menu_website_banner_root"
+        name="Banner"
+        parent="menu_website_pemkab_root"
+        sequence="10"/>
+        
+    <menuitem id="menu_website_banner"
+        name="Daftar Banner"
+        action="action_website_banner"
+        parent="menu_website_banner_root"
+        sequence="10"/>
+
+    <!-- Service Menu -->
+    <menuitem id="menu_government_service_root"
+        name="Layanan"
+        parent="menu_website_pemkab_root"
+        sequence="20"/>
+        
+    <menuitem id="menu_government_service"
+        name="Daftar Layanan"
+        action="action_government_service"
+        parent="menu_government_service_root"
+        sequence="10"/>
+        
+    <!-- News Menu -->
+    <menuitem id="menu_website_news_root"
+        name="Berita"
+        parent="menu_website_pemkab_root"
+        sequence="30"/>
+
+    <menuitem id="menu_website_news"
+        name="Semua Berita"
+        parent="menu_website_news_root"
+        action="action_website_news"
+        sequence="10"/>
+
+    <menuitem id="menu_website_news_category"
+        name="Kategori Berita"
+        parent="menu_website_news_root"
+        action="action_website_news_category"
+        sequence="20"/>
+
+<!--    Headline Menu-->
+    <menuitem id="menu_website_headline_root"
+        name="Headline"
+        parent="menu_website_pemkab_root"
+        sequence="30"/>
+
+    <menuitem id="menu_website_headline"
+        name="Semua Headline"
+        parent="menu_website_headline_root"
+        action="action_website_headline"
+        sequence="10"/>
+</odoo> 

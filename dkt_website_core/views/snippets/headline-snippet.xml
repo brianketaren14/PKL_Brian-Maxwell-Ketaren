@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="headline_snippet" name="Headline Snippet">
+        <section class="container headline_snippet" >
+            <div id="headline_row">
+                <t t-foreach="request.env['website.headline'].sudo().search([('is_published', '=', True)], order='create_date desc', limit=1)" t-as="headline">
+                    <div class="website-headline-background" t-attf-style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url('/web/image/website.headline/#{headline.id}/headline_image');">
+                        <div class="row position-relative h-100 w-100 text-light" >
+                            <div class="col position-absolute top-0 start-50 translate-middle-x text-center w-80 mt-3">
+                                <h2 t-field="headline.name"/>
+                                <p t-field="headline.description"/>
+                                <a href="#" class="btn btn-primary mt-3">Berita Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </section>
+    </template>
+
+</odoo>

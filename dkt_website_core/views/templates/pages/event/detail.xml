@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="event_detail" name="Event Detail" inherit_id="website_event.event_type_view_form">
+        <xpath expr="//form" position="inside">
+            <!-- Informasi Tambahan -->
+            <section class="s_event_additional_info py-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <!-- Sub Judul -->
+                            <t t-if="event.subtitle">
+                                <div class="event-subtitle mb-4">
+                                    <p class="lead" t-field="event.subtitle"/>
+                                </div>
+                            </t>
+
+                            <!-- Galeri Foto -->
+                            <t t-if="event.gallery_ids">
+                                <div class="event-gallery mb-4">
+                                    <h4>Galeri Foto</h4>
+                                    <div class="row">
+                                        <t t-foreach="event.gallery_ids" t-as="photo">
+                                            <div class="col-md-4 mb-3">
+                                                <img t-att-src="'/web/image/%s' % photo.id" class="img-fluid rounded" t-att-alt="photo.name"/>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <!-- Kategori -->
+                            <t t-if="event.category_id">
+                                <div class="event-category mb-4">
+                                    <h4>Kategori</h4>
+                                    <span class="badge" t-attf-style="background-color: #{event.category_id.color or '#7C7BAD'}">
+                                        <t t-esc="event.category_id.name"/>
+                                    </span>
+                                </div>
+                            </t>
+
+                            <!-- Lokasi -->
+                            <t t-if="event.location_address">
+                                <div class="event-location mb-4">
+                                    <h4>Lokasi</h4>
+                                    <p t-field="event.location_address"/>
+                                </div>
+                            </t>
+
+                            <!-- Kontak -->
+                            <div class="event-contact mb-4">
+                                <h4>Kontak</h4>
+                                <ul class="list-unstyled">
+                                    <t t-if="event.contact_person">
+                                        <li><i class="fa fa-user me-2"></i><t t-esc="event.contact_person"/></li>
+                                    </t>
+                                    <t t-if="event.contact_phone">
+                                        <li><i class="fa fa-phone me-2"></i><t t-esc="event.contact_phone"/></li>
+                                    </t>
+                                    <t t-if="event.contact_email">
+                                        <li><i class="fa fa-envelope me-2"></i><t t-esc="event.contact_email"/></li>
+                                    </t>
+                                </ul>
+                            </div>
+
+                            <!-- Dokumen -->
+                            <t t-if="event.document_ids">
+                                <div class="event-documents">
+                                    <h4>Dokumen</h4>
+                                    <ul class="list-unstyled">
+                                        <t t-foreach="event.document_ids" t-as="doc">
+                                            <li class="mb-2">
+                                                <a t-att-href="'/web/content/%s?download=true' % doc.id" class="btn btn-outline-primary btn-sm">
+                                                    <i class="fa fa-download me-2"></i>
+                                                    <t t-esc="doc.name"/>
+                                                </a>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+</odoo> 

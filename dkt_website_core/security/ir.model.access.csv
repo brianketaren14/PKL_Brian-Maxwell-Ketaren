@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_website_banner_public,website.banner.public,model_website_banner,,1,0,0,0
+access_website_banner_admin,website.banner.admin,model_website_banner,website.group_website_designer,1,1,1,1
+access_government_service_public,government.service.public,model_government_service,,1,0,0,0
+access_government_service_admin,government.service.admin,model_government_service,website.group_website_designer,1,1,1,1
+access_website_visitor_public,website.visitor.public,model_website_visitor,,1,0,0,0
+access_website_visitor_admin,website.visitor.admin,model_website_visitor,website.group_website_designer,1,1,1,1
+access_website_news_public,website.news.public,model_website_news,base.group_public,1,0,0,0
+access_website_news_website,website.news.website,model_website_news,website.group_website_designer,1,1,1,1
+access_website_news_category_public,website.news.category.public,model_website_news_category,base.group_public,1,0,0,0
+access_website_news_category_website,website.news.category.website,model_website_news_category,website.group_website_designer,1,1,1,1
+access_event_category_public,event.category.public,model_event_category,,1,0,0,0
+access_event_category_user,event.category.user,model_event_category,base.group_user,1,1,1,1
+access_website_headline_admin,website.headline.admin,model_website_headline,website.group_website_designer,1,1,1,1

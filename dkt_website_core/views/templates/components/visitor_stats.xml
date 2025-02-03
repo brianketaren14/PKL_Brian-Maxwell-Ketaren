@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Visitor Statistics Component -->
+    <template id="dkt_website_core.visitor_stats_template" name="Visitor Statistics">
+        <section class="visitor-stats-section py-4">
+            <div class="container">
+                <div class="visitor-stats">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="total-visitors">0</h3>
+                                    <p>Total Pengunjung</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="today-visitors">0</h3>
+                                    <p>Pengunjung Hari Ini</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="online-visitors">0</h3>
+                                    <p>Pengunjung Online</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo> 

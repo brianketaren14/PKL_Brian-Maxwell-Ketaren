@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_website_news_tree" model="ir.ui.view">
+        <field name="name">website.news.tree</field>
+        <field name="model">website.news</field>
+        <field name="arch" type="xml">
+            <tree string="Berita">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="author_id"/>
+                <field name="date_published"/>
+                <field name="view_count"/>
+                <field name="website_published" widget="boolean_toggle"/>
+                <field name="is_featured"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_website_news_form" model="ir.ui.view">
+        <field name="name">website.news.form</field>
+        <field name="model">website.news</field>
+        <field name="arch" type="xml">
+            <form string="Berita">
+                <header>
+                    <button name="toggle_published" type="object" 
+                            class="btn-primary" string="Publikasikan" 
+                            invisible="website_published"/>
+                    <button name="toggle_published" type="object" 
+                            class="btn-secondary" string="Batalkan Publikasi" 
+                            invisible="not website_published"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_published" type="object" class="oe_stat_button" icon="fa-globe">
+                            <field name="website_published" widget="boolean_button"/>
+                        </button>
+                        <button name="toggle_featured" type="object" class="oe_stat_button" icon="fa-star">
+                            <field name="is_featured" widget="boolean_button"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Judul Berita"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_id"/>
+                            <field name="author_id"/>
+                            <field name="date_published"/>
+                        </group>
+                        <group>
+                            <field name="view_count"/>
+                            <field name="slug"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Konten">
+                            <group>
+                                <field name="teaser" placeholder="Ringkasan singkat berita..."/>
+                                <field name="content" widget="html"/>
+                            </group>
+                        </page>
+                        <page string="Gambar">
+                            <group>
+                                <field name="thumbnail" widget="image"/>
+                                <field name="thumbnail_filename" invisible="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_website_news_search" model="ir.ui.view">
+        <field name="name">website.news.search</field>
+        <field name="model">website.news</field>
+        <field name="arch" type="xml">
+            <search string="Cari Berita">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="author_id"/>
+                <filter string="Dipublikasikan" name="published" domain="[('website_published', '=', True)]"/>
+                <filter string="Berita Unggulan" name="featured" domain="[('is_featured', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Kategori" name="category" context="{'group_by': 'category_id'}"/>
+                    <filter string="Penulis" name="author" context="{'group_by': 'author_id'}"/>
+                    <filter string="Bulan" name="month" context="{'group_by': 'date_published:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Category Views -->
+    <record id="view_website_news_category_tree" model="ir.ui.view">
+        <field name="name">website.news.category.tree</field>
+        <field name="model">website.news.category</field>
+        <field name="arch" type="xml">
+            <tree string="Kategori Berita">
+                <field name="name"/>
+                <field name="news_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_website_news_category_form" model="ir.ui.view">
+        <field name="name">website.news.category.form</field>
+        <field name="model">website.news.category</field>
+        <field name="arch" type="xml">
+            <form string="Kategori Berita">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="news_count"/>
+                    </group>
+                    <notebook>
+                        <page string="Berita">
+                            <field name="news_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="date_published"/>
+                                    <field name="website_published"/>
+                                    <field name="view_count"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_website_news" model="ir.actions.act_window">
+        <field name="name">Berita Website</field>
+        <field name="res_model">website.news</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Buat berita pertama Anda
+            </p>
+        </field>
+    </record>
+
+    <record id="action_website_news_category" model="ir.actions.act_window">
+        <field name="name">Kategori Berita</field>
+        <field name="res_model">website.news.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo> 

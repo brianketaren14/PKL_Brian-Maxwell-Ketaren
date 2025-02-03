@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Banner Carousel Component -->
+    <template id="dkt_website_core.banner_carousel" name="Banner Carousel">
+        <t t-set="banners" t-value="request.env['website.banner'].sudo().search([('active', '=', True)])"/>
+        <t t-if="banners">
+            <section class="s_carousel s_carousel_default" data-snippet="s_carousel">
+                <div id="o_carousel_banner" class="carousel slide">
+                    <div class="carousel-inner">
+                        <t t-foreach="banners" t-as="banner">
+                            <div t-attf-class="carousel-item #{banner_index == 0 and 'active' or ''} oe_img_bg o_bg_img_center" 
+                                 t-attf-style="background-image: url(#{image_data_uri(banner.image)}); min-height: 400px;">
+                                <t t-if="banner.description">
+                                    <div class="carousel-caption">
+                                        <div class="container">
+                                            <h2 class="text-white"><t t-esc="banner.name"/></h2>
+                                            <p class="text-white" t-field="banner.description"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                    <t t-if="len(banners) > 1">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#o_carousel_banner" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"/>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#o_carousel_banner" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"/>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </t>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo> 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Banner Tree View -->
+    <record id="view_website_banner_tree" model="ir.ui.view">
+        <field name="name">website.banner.tree</field>
+        <field name="model">website.banner</field>
+        <field name="arch" type="xml">
+            <tree string="Banner Website">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Banner Form View -->
+    <record id="view_website_banner_form" model="ir.ui.view">
+        <field name="name">website.banner.form</field>
+        <field name="model">website.banner</field>
+        <field name="arch" type="xml">
+            <form string="Banner Website">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Judul Banner"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="url" placeholder="https://..."/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Gambar">
+                            <group>
+                                <field name="image" widget="image"/>
+                            </group>
+                        </page>
+                        <page string="Deskripsi">
+                            <field name="description" placeholder="Deskripsi banner yang akan ditampilkan..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Banner Search View -->
+    <record id="view_website_banner_search" model="ir.ui.view">
+        <field name="name">website.banner.search</field>
+        <field name="model">website.banner</field>
+        <field name="arch" type="xml">
+            <search string="Cari Banner">
+                <field name="name"/>
+                <field name="description"/>
+                <filter string="Aktif" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Arsip" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Banner Action Window -->
+    <record id="action_website_banner" model="ir.actions.act_window">
+        <field name="name">Banner Website</field>
+        <field name="res_model">website.banner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Buat banner pertama Anda
+            </p>
+        </field>
+    </record>
+</odoo> 

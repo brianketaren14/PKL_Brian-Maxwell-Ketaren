@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="dkt_website_core.MapWidget" owl="1">
+        <div class="karo_map" t-ref="mapContainer">
+            <div class="map-container" t-ref="map"/>
+        </div>
+    </t>
+    
+    <t t-name="dkt_website_core.VisitorStats" owl="1">
+        <div class="visitor-stats p-3 bg-light rounded shadow-sm">
+            <h4 class="mb-3 text-primary">Statistik Pengunjung</h4>
+            <div class="row g-3">
+                <div class="col-4 text-center">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="h3 text-primary" t-esc="state.total"/>
+                            <div class="text-muted">Total Pengunjung</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 text-center">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="h3 text-success" t-esc="state.today"/>
+                            <div class="text-muted">Hari Ini</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 text-center">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="h3 text-info" t-esc="state.online"/>
+                            <div class="text-muted">Sedang Online</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates> 

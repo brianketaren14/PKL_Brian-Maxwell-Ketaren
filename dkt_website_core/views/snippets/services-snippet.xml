@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="government_services_snippet" name="Services Snippet">
+    <section class="services_snippet">
+        <div class="container">
+            <h2 class="text-center mb-5">Layanan Pemerintahan</h2>
+            <div class="slider-container " id="services-slider-container">
+                <button class="slider-btn prev-btn">&lt;</button>
+                <div class="slider services-row" id="slider">
+                    <t t-foreach="request.env['government.service'].sudo().search([('is_active', '=', True)])" t-as="service">
+                        <div class="card service-card-snippet service-card h-100">
+                        <div class="card-body d-flex flex-column position-relative text-center">
+                            <div class="service-icon mb-3">
+                                <img class="img-fluid rounded" style="max-height: 120px; object-fit: cover;" t-att-src="'/web/image/government.service/%s/icon' % service.id" />
+                            </div>
+                            <h5 class="card-title" t-field="service.name" />
+                            <p class="card-text flex-grow-1" t-field="service.description" />
+                            <div class="mt-auto">
+                                <a href="service.url" class="btn btn-primary">
+                                    Akses Layanan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    </t>
+                </div>
+                <button class="slider-btn next-btn">&gt;</button>
+            </div>
+
+        </div>
+    </section>
+    </template>
+</odoo>

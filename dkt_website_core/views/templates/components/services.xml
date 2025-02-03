@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="government_services_section" name="Government Services Section">
+        <section class="s_government_services py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Layanan Pemerintahan</h2>
+                <div class="row justify-content-center">
+                    <t t-foreach="request.env['government.service'].sudo().search([('is_active', '=', True)])" t-as="service">
+                        <div class="col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                            <div class="card service-card text-center h-100" style="width: 18rem;">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="service-icon mb-3">
+                                        <img t-if="service.icon" t-att-src="'/web/image/government.service/%s/icon' % service.id"
+                                             class="img-fluid rounded" style="max-height: 120px; object-fit: cover;"/>
+                                    </div>
+                                    <h5 class="card-title" t-field="service.name"/>
+                                    <p class="card-text flex-grow-1" t-field="service.description"/>
+                                    <div class="mt-auto">
+                                        <a t-att-href="service.url" class="btn btn-primary">
+                                            Akses Layanan
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo> 

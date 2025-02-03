@@ -1,0 +1,57 @@
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            width: 100%;
+            margin: auto;
+        }
+
+        .slider {
+            display: flex;
+            gap: 50px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .news-card-snippet, .service-card-snippet  {
+            flex: 0 0 auto;
+            width: 300px;
+
+            /* Default max-width */
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            display: none;
+        }
+
+        .prev-btn {
+            left: 0;
+        }
+
+        .next-btn {
+            right: 0;
+        }
+
+//         /* Responsiveness */
+        @media (max-width: 1200px) {
+            .news-card-snippet, .service-card-snippet {
+                max-width: 265px;
+                /* Lebar kartu untuk tablet dan perangkat lebih kecil */
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .news-card-snippet, .service-card-snippet {
+                max-width: 250px;
+                /* Lebar kartu untuk tablet dan perangkat lebih kecil */
+            }
+        }
+

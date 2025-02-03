@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Homepage Layout -->
+    <template id="karokab_homepage" name="Karo Homepage" inherit_id="website.homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="o_home_karo">
+                <div class="oe_structure" id="oe_structure_website_homepage_1"/>
+                
+                <!-- Banner Carousel -->
+                <t t-call="dkt_website_core.banner_carousel"/>
+                
+                <!-- Container untuk konten lainnya -->
+                <div class="content-wrapper">
+                    <!-- Layanan -->
+                    <t t-call="dkt_website_core.government_services_section"/>
+                    
+                    <!-- Event -->
+                    <!-- <t t-call="dkt_website_core.event_section"/> -->
+                    
+                    <!-- Berita -->
+                    <t t-call="dkt_website_core.news_section"/>
+                    
+                    <!-- Statistik Pengunjung -->
+                    <t t-call="dkt_website_core.visitor_stats_template"/>
+                    
+                    <!-- Peta -->
+                    <t t-call="dkt_website_core.map_section"/>
+                </div>
+                
+                <div class="oe_structure" id="oe_structure_website_homepage_2"/>
+            </div>
+        </xpath>
+    </template>
+</odoo> 

@@ -1,0 +1,47 @@
+<odoo>
+    <template id="news_snippet" name="News Snippet">
+        <section class="news_snippet">
+            <div class="container">
+                <h2 class="text-center mb-5">Berita Terkini</h2>
+                <div class="slider-container" id="news-slider-container">
+                    <button class="slider-btn prev-btn">&lt;</button>
+                    <div class="slider news-row" id="slider">
+                        <t t-foreach="request.env['website.news'].sudo().search([('website_published', '=', True)], limit=10, order='date_published desc')" t-as="news">
+                                <div class="card news-card-snippet h-100">
+                                    <img t-att-src="image_data_uri(news.thumbnail)" class="card-img-top" t-att-alt="news.name" height="200"/>
+                                    <div class="card-body position-relative">
+                                     <span t-if="news.category_id" class="badge bg-primary mb-2">
+                                            <t t-esc="news.category_id.name"/>
+                                     </span>
+                                    <h5 class="card-title" style="height:3em;">
+                                        <t t-esc="news.name"/>
+                                    </h5>
+                                    <p class="card-text" style="overflow-y: auto; height:100px">
+                                        <t t-esc="news.teaser"/>
+                                    </p>
+                                    <div>
+                                        <div class="text-muted mb-3">
+                                            <small>
+                                                <i class="fa fa-calendar me-1"/>
+                                                <t t-esc="news.date_published" t-options='{"widget": "date"}'/>
+                                                <i class="fa fa-eye ms-2 me-1"/>
+                                                <t t-esc="news.view_count"/> kali dilihat
+                                            </small>
+                                        </div>
+                                        <a href="/news/#{news.slug}" class="btn btn-primary">
+                                            Baca Selengkapnya
+                                        </a>
+                                    </div>
+                                </div>
+                                </div>
+                        </t>
+                    </div>
+                    <button class="slider-btn next-btn">&gt;</button>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="/news" class="btn btn-outline-primary">Lihat Semua Berita</a>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

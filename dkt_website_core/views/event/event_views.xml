@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View Inheritance -->
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Informasi Tambahan" name="additional_info">
+                    <group>
+                        <group>
+                            <field name="subtitle"/>
+                            <field name="location_address"/>
+                            <field name="is_featured"/>
+                            <field name="category_id"/>
+                        </group>
+                        <group>
+                            <field name="contact_person"/>
+                            <field name="contact_phone"/>
+                            <field name="contact_email"/>
+                        </group>
+                    </group>
+                    <group string="Galeri &amp; Dokumen">
+                        <field name="gallery_ids" widget="many2many_binary"/>
+                        <field name="document_ids" widget="many2many_binary"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree View untuk Kategori Event -->
+    <record id="view_event_category_tree" model="ir.ui.view">
+        <field name="name">event.category.tree</field>
+        <field name="model">event.category</field>
+        <field name="arch" type="xml">
+            <tree string="Kategori Event">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View untuk Kategori Event -->
+    <record id="view_event_category_form" model="ir.ui.view">
+        <field name="name">event.category.form</field>
+        <field name="model">event.category</field>
+        <field name="arch" type="xml">
+            <form string="Kategori Event">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="color" widget="color_picker"/>
+                            <field name="icon" widget="image"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action untuk Kategori Event -->
+    <record id="action_event_category" model="ir.actions.act_window">
+        <field name="name">Kategori Event</field>
+        <field name="res_model">event.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item untuk Kategori Event -->
+    <menuitem id="menu_event_category"
+              name="Kategori Event"
+              parent="event.event_main_menu"
+              action="action_event_category"
+              sequence="20"/>
+</odoo> 

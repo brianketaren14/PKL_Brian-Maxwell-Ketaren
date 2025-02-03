@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="dkt_website_core.event_section" name="Event Terkini">
+        <section class="s_event_section py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Event Terkini</h2>
+                <div class="row">
+                    <t t-foreach="request.env['event.event'].sudo().search([('website_published', '=', True)], limit=3, order='date_begin asc')" t-as="event">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <t t-if="event.image">
+                                    <img class="card-img-top" t-att-src="image_data_uri(event.image)" t-att-alt="event.name"/>
+                                </t>
+                                <div class="card-body">
+                                    <span t-if="event.event_type_id" class="badge bg-primary mb-2">
+                                        <t t-esc="event.event_type_id.name"/>
+                                    </span>
+                                    <h5 class="card-title"><t t-esc="event.name"/></h5>
+                                    <p class="card-text text-muted">
+                                        <i class="fa fa-calendar me-2"></i>
+                                        <t t-esc="event.date_begin" t-options="{'widget': 'datetime', 'format': 'dd MMM yyyy'}"/>
+                                    </p>
+                                    <p class="card-text" t-field="event.description" t-options="{'widget': 'text'}"/>
+                                    <a t-att-href="'/event/%s' % slug(event)" class="btn btn-primary">
+                                        Lihat Detail
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="/event" class="btn btn-outline-primary">Lihat Semua Event</a>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo> 

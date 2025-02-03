@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Map Component -->
+    <template id="dkt_website_core.map_section" name="Location Map">
+        <section class="s_map py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Peta Lokasi</h2>
+                <div class="karo-map" style="height: 400px; width: 100%; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"/>
+            </div>
+        </section>
+    </template>
+</odoo> 
